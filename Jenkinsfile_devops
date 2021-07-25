@@ -3,9 +3,6 @@ pipeline {
 
     stages {
         stage ('List repo content') {
-        when {
-                branch "master"
-        }
         steps {
                 sh 'ls -ltr'
             }
@@ -15,9 +12,40 @@ pipeline {
                 sh 'mkdir -p /tmp/email/others'
             }
         }
-        stage ('Copy file from downloaded repo to dest') {
+        // if it is master branch, copy email.txt to /tmp/email
+        stage ("manage default emails"){
+            when {
+                branch "master"
+            }
+            steps {
+                sh 'cp emails.txt /tmp/email'
+            }
+        }
+        // if it is gmail branch, copy gmail.txt to /tmp/email/others
+        stage ("manage gmail accounts"){
+            when {
+                branch "gmail"
+            }
+            steps {
+                sh 'cp gmail.txt /tmp/email/others'
+            }
+        }
+        // if it is hotmail branch, copy hotmail.txt to /tmp/email/others
+        stage ("manage hotmail accounts"){
+            when {
+                branch "hotmail"
+            }
             steps {
                 sh 'cp hotmail.txt /tmp/email/others'
+            }
+        }
+        // if it is twitter branch, copy twitter.txt to /tmp/email/others
+        stage ("manage twitter accounts"){
+            when {
+                branch "twitter"
+            }
+            steps {
+                sh 'cp twitter.txt /tmp/email/others'
             }
         }
 
