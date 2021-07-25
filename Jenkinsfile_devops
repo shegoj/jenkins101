@@ -2,10 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage ('List depo content') {
+        stage ('List repo content') {
             steps {
                 sh 'ls -ltr'
             }
         }
+        stage ('create email dir on target machine') {
+            steps {
+                sh 'mkdir -p /tmp/email'
+            }
+        }
+        stage ('Copy file from downloaded repo to dest') {
+            steps {
+                sh 'cp emails.txt /tmp/email'
+            }
+        }
+
     }
 }
