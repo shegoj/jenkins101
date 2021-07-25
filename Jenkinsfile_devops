@@ -2,6 +2,9 @@ pipeline {
     agent any
 
     stages {
+        when {
+                branch "master"
+        }
         stage ('List repo content') {
             steps {
                 sh 'ls -ltr'
