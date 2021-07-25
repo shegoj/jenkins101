@@ -9,12 +9,12 @@ pipeline {
         }
         stage ('create email dir on target machine') {
             steps {
-                sh 'mkdir -p /tmp/email'
+                sh 'mkdir -p /tmp/email/others'
             }
         }
         stage ('Copy file from downloaded repo to dest') {
             steps {
-                sh 'cp emails.txt /tmp/email'
+                sh 'cp gmail.txt /tmp/email/others'
             }
         }
 
